@@ -1,0 +1,154 @@
+.page-hero--light {
+  background: var(--white);
+  color: var(--black);
+  border-bottom: 1px solid var(--pearl);
+
+  h1 {
+    color: var(--black);
+  }
+}
+
+.cart {
+  min-height: 50vh;
+
+  &__empty {
+    text-align: center;
+    padding: 5rem 0;
+
+    p {
+      margin-bottom: 2rem;
+      color: rgba(13, 13, 13, 0.5);
+    }
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  &__summary {
+    position: sticky;
+    top: 96px;
+    padding: 2rem;
+    background: var(--pearl);
+    border: 1px solid rgba(13, 13, 13, 0.06);
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__note {
+    color: rgba(13, 13, 13, 0.5);
+    font-size: 0.8rem !important;
+    line-height: 1.5;
+    margin: 1rem 0 1.5rem !important;
+  }
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--pearl);
+  align-items: center;
+
+  img {
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+    background: var(--pearl);
+  }
+
+  &__info h2 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  &__sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  &__size,
+  &__perso {
+    font-size: 0.8rem;
+    color: rgba(13, 13, 13, 0.55);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  &__remove {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    color: rgba(13, 13, 13, 0.4);
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--black);
+    }
+  }
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--pearl);
+
+  button {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+      background: var(--pearl);
+    }
+  }
+
+  span {
+    min-width: 32px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    grid-template-columns: 80px 1fr;
+
+    &__actions {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}

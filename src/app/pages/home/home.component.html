@@ -1,0 +1,137 @@
+<section class="hero">
+  <div class="hero__bg">
+    <img src="/assets/brand/hero-roles.png" alt="Tenues professionnelles ALLURE WORKPRO — Chef, Responsable de Salle, Serveur, Bar, Commis" />
+  </div>
+  <div class="hero__content container">
+    <p class="hero__eyebrow">Tenues Professionnelles Restauration</p>
+    <h1 class="hero__title">ALLURE WORKPRO</h1>
+    <p class="hero__tagline">Élégance · Confort · Performance</p>
+    <p class="hero__subtitle">L'élégance dans les détails</p>
+    <div class="hero__actions">
+      <a routerLink="/catalogue" class="btn btn--gold">Découvrir la collection</a>
+      <a routerLink="/personnalisation" class="btn btn--outline">Personnaliser</a>
+    </div>
+  </div>
+</section>
+
+<section class="values section">
+  <div class="container">
+    <div class="section__header section__header--with-icon">
+      <span class="section__eyebrow">Notre savoir-faire</span>
+      <span class="section__section-icon">✦</span>
+      <h2>L'élégance dans les détails</h2>
+    </div>
+    <div class="values__grid">
+      <div class="values__list">
+        <div class="value-item">
+          <span class="value-item__icon">✦</span>
+          <div>
+            <h3>Broderie Ton sur Ton</h3>
+            <p>Monogramme discret et raffiné pour une identité premium.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-item__icon">✦</span>
+          <div>
+            <h3>Col Officier</h3>
+            <p>Design moderne et élégant pour une allure professionnelle.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-item__icon">✦</span>
+          <div>
+            <h3>Matières Premium</h3>
+            <p>Tissus respirants, résistants et confortables pour le service.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-item__icon">✦</span>
+          <div>
+            <h3>Finitions Soignées</h3>
+            <p>Coutures renforcées et détails métalliques de qualité.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="materials section section--dark">
+  <div class="container materials__grid">
+    <div class="materials__content">
+      <div class="materials__heading">
+        <span class="section__eyebrow">Matières Techniques</span>
+        <span class="section__section-icon">◇</span>
+      </div>
+      <h2>Conçues pour durer</h2>
+      <div class="materials__features">
+        <div class="material-feature">
+          <img src="/assets/icons/Respirantes.png" alt="Respirantes" class="material-feature__icon" />
+          <div>
+            <h3>Respirantes</h3>
+            <p>Confort optimal tout au long du service.</p>
+          </div>
+        </div>
+        <div class="material-feature">
+          <img src="/assets/icons/Resistantes.png" alt="Résistantes" class="material-feature__icon" />
+          <div>
+            <h3>Résistantes</h3>
+            <p>Conçues pour durer lavage après lavage.</p>
+          </div>
+        </div>
+        <div class="material-feature">
+          <img src="/assets/icons/elasticity.png" alt="Confort Stretch" class="material-feature__icon" />
+          <div>
+            <h3>Confort Stretch</h3>
+            <p>Liberté de mouvement et aisance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured section">
+  <div class="container">
+    <div class="section__header section__header--row">
+      <div>
+        <span class="section__eyebrow">Collection</span>
+        <h2>Nos produits phares</h2>
+      </div>
+      <a routerLink="/catalogue" class="link-gold">Voir tout →</a>
+    </div>
+    <div class="featured__grid">
+      @for (product of featured; track product.id) {
+        <app-product-card [product]="product" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="cta section">
+  <div class="container cta__inner">
+    <img src="/assets/brand/personalization-cta.png" alt="Votre identité, notre savoir-faire — Personnalisation logo" class="cta__image" loading="lazy" />
+    <div class="cta__content">
+      <span class="section__eyebrow">Personnalisation</span>
+      <h2>Votre identité, notre savoir-faire</h2>
+      <p>Personnalisez vos tenues avec votre propre logo pour refléter l'image unique de votre établissement. Broderie ton sur ton ou couleur.</p>
+      <a routerLink="/personnalisation" class="btn btn--gold">Demander un devis</a>
+    </div>
+  </div>
+</section>
+
+<section class="palette section section--pearl">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__eyebrow">Identité visuelle</span>
+      <h2>Gamme de couleurs</h2>
+    </div>
+    <ul class="palette__swatches">
+      <li><span style="background:#0D0D0D"></span> Noir Profond</li>
+      <li><span style="background:#FFFFFF;border:1px solid #ddd"></span> Blanc Pur</li>
+      <li><span style="background:#C7B8A6"></span> Beige Sable</li>
+      <li><span style="background:#E5E5E5"></span> Gris Perle</li>
+      <li><span style="background:#C8A46B"></span> Or Champagne</li>
+    </ul>
+  </div>
+</section>

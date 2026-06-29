@@ -1,0 +1,26 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="section__eyebrow">Collection</span>
+    <h1>{{ pageTitle }}</h1>
+    <p class="page-hero__desc">Tenues professionnelles conçues pour l'excellence du service.</p>
+  </div>
+</section>
+
+<section class="catalog section">
+  <div class="container">
+    <nav class="catalog__filters" aria-label="Filtrer par catégorie">
+      <a routerLink="/catalogue" [class.active]="!activeCategory">Tous</a>
+      @for (cat of categories; track cat.id) {
+        <a [routerLink]="['/catalogue', cat.id]" [class.active]="activeCategory === cat.id">{{ cat.label }}</a>
+      }
+    </nav>
+
+    <div class="catalog__grid">
+      @for (product of items; track product.id) {
+        <app-product-card [product]="product" />
+      } @empty {
+        <p class="catalog__empty">Aucun produit dans cette catégorie.</p>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,131 @@
+.footer {
+  background: var(--black);
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: 4rem;
+  border-top: 1px solid rgba(200, 164, 107, 0.12);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  &__mark {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--gold);
+  }
+
+  &__name {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--white);
+  }
+
+  &__logo-image {
+    max-height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  &__tagline {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-top: 0.25rem;
+  }
+
+  &__desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 320px;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+
+    h4 {
+      font-family: var(--font-serif);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: var(--gold);
+      }
+    }
+  }
+
+  &__muted {
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  &__colors {
+    display: flex;
+    gap: 0.5rem;
+
+    span {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+
+      &:nth-child(1) { background: #0D0D0D; }
+      &:nth-child(2) { background: #FFFFFF; }
+      &:nth-child(3) { background: #C7B8A6; }
+      &:nth-child(4) { background: #E5E5E5; }
+      &:nth-child(5) { background: #C8A46B; }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

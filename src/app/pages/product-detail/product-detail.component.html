@@ -1,0 +1,199 @@
+@if (product) {
+  <article class="product" itemscope itemtype="https://schema.org/Product">
+    <div class="container product__layout">
+      <div class="product__gallery">
+        <div class="product__main-image">
+          <img [src]="product.gallery[activeImage()]" [alt]="product.name" itemprop="image" />
+        </div>
+        <div class="product__thumbs">
+          @for (img of product.gallery; track img; let i = $index) {
+            <button (click)="setImage(i)" [class.active]="activeImage() === i" [attr.aria-label]="'Image ' + (i + 1)">
+              <img [src]="img" [alt]="product.name + ' vue ' + (i + 1)" loading="lazy" />
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="product__info">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a routerLink="/catalogue">Catalogue</a>
+          <span>/</span>
+          <span>{{ product.name }}</span>
+        </nav>
+
+        <p class="product__subtitle">{{ product.subtitle }}</p>
+        <h1 class="product__title" itemprop="name">{{ product.name }}</h1>
+        <p class="product__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+          À partir de <span itemprop="price">{{ product.priceFrom }}</span>€
+          <meta itemprop="priceCurrency" content="EUR" />
+        </p>
+        <p class="product__desc" itemprop="description">{{ product.description }}</p>
+
+        <div class="product__form">
+          <div class="form-group">
+            <label for="size">Taille</label>
+            <select id="size" [(ngModel)]="selectedSize">
+              @for (size of getSizes(); track size) {
+                <option [value]="size">{{ size }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="qty">Quantité</label>
+            <input id="qty" type="number" min="1" max="99" [(ngModel)]="quantity" />
+          </div>
+
+          <div class="form-group form-group--check">
+            <label>
+              <input type="checkbox" [(ngModel)]="personalize" />
+              Ajouter une personnalisation (broderie logo)
+            </label>
+          </div>
+
+          @if (personalize) {
+            <div class="personalize-fields">
+              <div class="form-group">
+                <label for="ptype">Type de broderie</label>
+                <select id="ptype" [(ngModel)]="personalizationType">
+                  <option [value]="product.personalization.type">{{ product.personalization.type }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pplace">Emplacement</label>
+                <select id="pplace" [(ngModel)]="personalizationPlacement">
+                  @for (p of product.personalization.placements; track p) {
+                    <option [value]="p">{{ p }}</option>
+                  }
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="logo">Notes logo (nom, fichier à envoyer par email)</label>
+                <textarea id="logo" rows="2" [(ngModel)]="logoNote" placeholder="Ex: Logo Restaurant Le Jardin, format vectoriel"></textarea>
+              </div>
+            </div>
+          }
+
+          <button class="btn btn--gold btn--full" (click)="addToCart()">Ajouter au panier</button>
+          @if (addedToCart) {
+            <p class="product__added" role="status">✓ Ajouté au panier</p>
+          }
+          <a routerLink="/panier" class="btn btn--outline btn--full">Voir le panier</a>
+        </div>
+
+        @if (product.sizeGuide) {
+          <button class="link-gold size-toggle" (click)="showSizeGuide = !showSizeGuide">
+            {{ showSizeGuide ? 'Masquer' : 'Voir' }} le guide des tailles
+          </button>
+          @if (showSizeGuide) {
+            <div class="size-table-wrap">
+              <table class="size-table">
+                <thead>
+                  <tr>
+                    @for (h of product.sizeGuide.headers; track h) {
+                      <th>{{ h }}</th>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (row of product.sizeGuide.rows; track row.size) {
+                    <tr>
+                      <td><strong>{{ row.size }}</strong></td>
+                      @for (v of row.values; track v) {
+                        <td>{{ v }}</td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+              </table>
+              @if (product.sizeGuide.tip) {
+                <p class="size-tip">{{ product.sizeGuide.tip }}</p>
+              }
+            </div>
+          }
+        }
+
+        @if (product.dimensions) {
+          <div class="dimensions">
+            <h3>Dimensions</h3>
+            <dl>
+              @for (d of product.dimensions; track d.label) {
+                <div><dt>{{ d.label }}</dt><dd>{{ d.value }}</dd></div>
+              }
+            </dl>
+          </div>
+        }
+      </div>
+    </div>
+
+    <section class="product__details section">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__eyebrow">Détails & Finitions</span>
+          <h2>L'élégance dans les détails</h2>
+        </div>
+        <div class="details-grid">
+          @for (detail of product.details; track detail.title) {
+            <figure class="detail-card">
+              <img [src]="detail.image" [alt]="detail.title + ' — ' + product.name" loading="lazy" />
+              <figcaption>{{ detail.title }}</figcaption>
+            </figure>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="product__specs section section--pearl">
+      <div class="container specs-grid">
+        <div>
+          <span class="section__eyebrow">Informations Techniques</span>
+          <h2>Spécifications</h2>
+          <dl class="specs-list">
+            @for (spec of product.specs; track spec.label) {
+              <div><dt>{{ spec.label }}</dt><dd>{{ spec.value }}</dd></div>
+            }
+          </dl>
+          @if (product.care.length) {
+            <div class="care">
+              <h3>Entretien</h3>
+              <ul>
+                @for (c of product.care; track c) {
+                  <li>{{ c }}</li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+        <div>
+          <span class="section__eyebrow">Matière & Confort</span>
+          <h2>Qualités</h2>
+          <div class="features-grid">
+            @for (f of product.features; track f.title) {
+              <div class="feature-card">
+                <span class="feature-card__icon">{{ f.icon }}</span>
+                <h3>{{ f.title }}</h3>
+                <p>{{ f.description }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    @if (related.length) {
+      <section class="section">
+        <div class="container">
+          <div class="section__header">
+            <span class="section__eyebrow">Vous aimerez aussi</span>
+            <h2>Produits associés</h2>
+          </div>
+          <div class="related-grid">
+            @for (p of related; track p.id) {
+              <app-product-card [product]="p" />
+            }
+          </div>
+        </div>
+      </section>
+    }
+  </article>
+}

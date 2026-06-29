@@ -1,0 +1,70 @@
+<section class="page-hero page-hero--light">
+  <div class="container">
+    <span class="section__eyebrow">Finalisation</span>
+    <h1>Passer commande</h1>
+    <p class="page-hero__desc">Votre commande sera envoyée par email. Nous vous recontacterons avec un devis personnalisé.</p>
+  </div>
+</section>
+
+<section class="checkout section">
+  <div class="container">
+    @if (success) {
+      <div class="checkout__success">
+        <span class="checkout__icon">✓</span>
+        <h2>Commande envoyée</h2>
+        <p>Merci ! Votre demande a été transmise. Notre équipe vous contactera sous 24-48h.</p>
+        <a routerLink="/catalogue" class="btn btn--gold">Retour au catalogue</a>
+      </div>
+    } @else {
+      <div class="checkout__layout">
+        <form class="checkout__form" (ngSubmit)="submit()" #form="ngForm">
+          <h2>Vos coordonnées</h2>
+
+          <div class="form-group">
+            <label for="name">Nom complet *</label>
+            <input id="name" name="name" [(ngModel)]="customerName" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" [(ngModel)]="email" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone *</label>
+              <input id="phone" name="phone" type="tel" [(ngModel)]="phone" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Établissement / Entreprise</label>
+            <input id="company" name="company" [(ngModel)]="company" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message / Instructions</label>
+            <textarea id="message" name="message" rows="4" [(ngModel)]="message" placeholder="Délais souhaités, quantités par taille, notes logo..."></textarea>
+          </div>
+
+          @if (error) {
+            <p class="checkout__error" role="alert">{{ error }}</p>
+          }
+
+          <button type="submit" class="btn btn--gold btn--full" [disabled]="submitting">
+            {{ submitting ? 'Envoi en cours...' : 'Envoyer la commande par email' }}
+          </button>
+        </form>
+
+        <aside class="checkout__summary">
+          <h2>Votre commande</h2>
+          @for (item of cart.cartItems(); track $index) {
+            <div class="summary-item">
+              <strong>{{ item.product.name }}</strong>
+              <span>{{ item.size }} × {{ item.quantity }}</span>
+            </div>
+          }
+        </aside>
+      </div>
+    }
+  </div>
+</section>

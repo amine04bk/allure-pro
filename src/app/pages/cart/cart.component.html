@@ -1,0 +1,55 @@
+<section class="page-hero page-hero--light">
+  <div class="container">
+    <span class="section__eyebrow">Commande</span>
+    <h1>Panier</h1>
+  </div>
+</section>
+
+<section class="cart section">
+  <div class="container">
+    @if (cart.isEmpty()) {
+      <div class="cart__empty">
+        <p>Votre panier est vide.</p>
+        <a routerLink="/catalogue" class="btn btn--gold">Découvrir la collection</a>
+      </div>
+    } @else {
+      <div class="cart__layout">
+        <div class="cart__items">
+          @for (item of cart.cartItems(); track $index; let i = $index) {
+            <article class="cart-item">
+              <img [src]="item.product.heroImage" [alt]="item.product.name" />
+              <div class="cart-item__info">
+                <h2>{{ item.product.name }}</h2>
+                <p class="cart-item__sub">{{ item.product.subtitle }}</p>
+                <p class="cart-item__size">Taille : {{ item.size }}</p>
+                @if (item.personalization?.enabled) {
+                  <p class="cart-item__perso">
+                    Personnalisation : {{ item.personalization!.placement }}
+                    @if (item.personalization!.logoNote) {
+                      — {{ item.personalization!.logoNote }}
+                    }
+                  </p>
+                }
+              </div>
+              <div class="cart-item__actions">
+                <div class="qty-control">
+                  <button (click)="updateQty(i, item.quantity - 1)" aria-label="Diminuer">−</button>
+                  <span>{{ item.quantity }}</span>
+                  <button (click)="updateQty(i, item.quantity + 1)" aria-label="Augmenter">+</button>
+                </div>
+                <button class="cart-item__remove" (click)="remove(i)">Retirer</button>
+              </div>
+            </article>
+          }
+        </div>
+        <aside class="cart__summary">
+          <h2>Récapitulatif</h2>
+          <p>{{ cart.count() }} article(s)</p>
+          <p class="cart__note">Les prix finaux et devis personnalisation seront confirmés par email.</p>
+          <a routerLink="/commander" class="btn btn--gold btn--full">Passer commande</a>
+          <a routerLink="/catalogue" class="link-gold">Continuer mes achats</a>
+        </aside>
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<article class="card">
+  <a [routerLink]="['/produit', product.slug]" class="card__link">
+    <div class="card__image-wrap">
+      <img [src]="product.heroImage" [alt]="product.name + ' — ' + product.subtitle" loading="lazy" />
+      <div class="card__overlay">
+        <span>Voir le produit</span>
+      </div>
+    </div>
+    <div class="card__body">
+      <p class="card__category">{{ product.subtitle }}</p>
+      <h3 class="card__title">{{ product.name }}</h3>
+      <p class="card__price">À partir de {{ product.priceFrom }}€</p>
+    </div>
+  </a>
+</article>
