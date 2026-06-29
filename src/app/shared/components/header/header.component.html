@@ -18,6 +18,7 @@
     </nav>
 
     <a routerLink="/panier" class="cart-btn" (click)="closeMenu()" aria-label="Panier">
+      <span class="cart-btn__icon" aria-hidden="true">🛒</span>
       <span class="cart-btn__label">Panier</span>
       @if (cart.count() > 0) {
         <span class="cart-btn__count">{{ cart.count() }}</span>

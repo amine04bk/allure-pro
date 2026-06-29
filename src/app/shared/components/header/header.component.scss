@@ -73,6 +73,12 @@
     color: var(--black);
   }
 
+  &__icon {
+    display: none;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
   &__count {
     display: inline-flex;
     align-items: center;
@@ -135,6 +141,10 @@
 
   .cart-btn__label {
     display: none;
+  }
+
+  .cart-btn__icon {
+    display: inline-flex;
   }
 }
 
